@@ -23,6 +23,8 @@ for (let i = 0; i < cratesColumns; i++) {
 // let's move crates arounds
 for (const moveLine of movesInput.split("\n")) {
   const [_1, amount, _2, from, _3, to] = moveLine.split(" ");
-    crates[parseInt(to) - 1].push(...crates[parseInt(from) - 1].splice(-parseInt(amount)));
+  crates[parseInt(to) - 1].push(
+    ...crates[parseInt(from) - 1].splice(-parseInt(amount))
+  );
 }
-console.log(crates.map((column) => column.pop()).join(""))
+console.log(crates.map((column) => column.pop()).join(""));

@@ -27,4 +27,4 @@ for (const moveLine of movesInput.split("\n")) {
     crates[parseInt(to) - 1].push(crates[parseInt(from) - 1].pop() as string);
   }
 }
-console.log(crates.map((column) => column.pop()).join(""))
+console.log(crates.map((column) => column.pop()).join(""));

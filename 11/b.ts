@@ -36,9 +36,7 @@ for (const inputMonkey of inputMonkeys) {
 }
 
 const proddiv = monkeys.reduce((acc, cur) => acc * cur.divisibleBy, 1);
-console.log(proddiv);
 for (let round = 0; round < 10000; round++) {
-  if (round % 100 === 0) console.log(`Round ${round} of 10000`);
   for (const monkey of monkeys) {
     for (const item of monkey.items) {
       monkey.inspections += 1;

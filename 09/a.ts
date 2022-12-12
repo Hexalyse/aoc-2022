@@ -15,6 +15,8 @@ function move(position: number[], direction: string): number[] {
       return [position[0] - 1, position[1]];
     case RIGHT:
       return [position[0] + 1, position[1]];
+    default:
+      return [0, 0]
   }
 }
 

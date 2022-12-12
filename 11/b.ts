@@ -41,8 +41,8 @@ for (let round = 0; round < 10000; round++) {
   if (round % 100 === 0) console.log(`Round ${round} of 10000`);
   for (const monkey of monkeys) {
     for (const item of monkey.items) {
-      // if monkey.operand is NaN, then operand is item
       monkey.inspections += 1;
+      // if monkey.operand is NaN, then operand is item
       const operand = isNaN(monkey.operand) ? item : monkey.operand;
       const newWorryLevel = eval(`${item} ${monkey.operator} ${operand}`) % proddiv;
       if (newWorryLevel % monkey.divisibleBy === 0) {

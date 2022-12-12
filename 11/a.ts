@@ -38,8 +38,8 @@ for (const inputMonkey of inputMonkeys) {
 for (let round = 0; round < 20; round++) {
   for (const monkey of monkeys) {
     for (const item of monkey.items) {
-      // if monkey.operand is NaN, then operand is item
       monkey.inspections += 1;
+      // if monkey.operand is NaN, then operand is item
       const operand = isNaN(monkey.operand) ? item : monkey.operand;
       const newWorryLevel = Math.floor((eval(`${item} ${monkey.operator} ${operand}`) / 3));
       if (newWorryLevel % monkey.divisibleBy === 0) {

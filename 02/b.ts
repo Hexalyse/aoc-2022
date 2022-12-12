@@ -25,24 +25,24 @@ for (const round of rounds) {
     // We need to draw the round
   } else if (result === "Y") {
     if (enemy === "A") {
-        score += 1;
+      score += 1;
     }
     if (enemy === "B") {
-        score += 2;
+      score += 2;
     }
     if (enemy === "C") {
-        score += 3;
+      score += 3;
     }
     // We need to win the round
   } else if (result === "Z") {
     if (enemy === "A") {
-        score += 2;
+      score += 2;
     }
     if (enemy === "B") {
-        score += 3;
+      score += 3;
     }
     if (enemy === "C") {
-        score += 1;
+      score += 1;
     }
   }
   score += correspondancePoints.get(result);

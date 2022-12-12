@@ -2,10 +2,6 @@ const input = await Deno.readTextFile("./input.txt");
 
 const pairs = input.split("\n");
 
-// Each pair looks like this:
-// x-y,a-b
-// where x-y is a range, and a-b another range
-
 // Calculate in how many pairs one range fully contains the other
 const fullyContained = pairs.reduce((acc, pair) => {
   const [range1, range2] = pair.split(",");

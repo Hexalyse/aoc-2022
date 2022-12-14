@@ -1,6 +1,6 @@
 const input = await Deno.readTextFile("./input.txt");
 
-// Initialize a 500x500 grid of .s
+// Initialize a 500x500 grid of .s  (yes the height could  be equal to the max height of the structure, but whatever)
 const grid = Array.from({ length: 600 }, () =>
   Array.from({ length: 600 }, () => ".")
 );

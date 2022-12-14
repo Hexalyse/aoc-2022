@@ -57,7 +57,6 @@ for (let sandCount = 0; sandCount < Infinity; sandCount++) {
   let sandPos = [500, 0];
   let finished = false;
   while (!atRest) {
-    // if sand reached the bottom of the grid, we are falling through, stop producing sand
     if (grid[sandPos[0]][sandPos[1] + 1] === ".") {
       // sand is falling straight down
       sandPos[1]++;
@@ -70,6 +69,7 @@ for (let sandCount = 0; sandCount < Infinity; sandCount++) {
       sandPos[0]++;
       sandPos[1]++;
     } else {
+      // if sand is at rest at the start position, we're done
       if (sandPos[0] === 500 && sandPos[1] === 0) {
         finished = true;
         break;

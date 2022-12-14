@@ -36,7 +36,6 @@ packets.push([[6]]);
 
 packets.sort(compare);
 
-console.log(packets);
 const divider1Pos = packets.findIndex(
   (packet) =>
     packet.length === 1 && packet[0].length === 1 && packet[0][0] === 2

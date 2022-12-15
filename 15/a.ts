@@ -6,7 +6,7 @@ const lines = input.split("\n");
 // Initialize empty grid
 const grid = [];
 
-const beacons = new Set();
+const beacons: number[][] = [];
 // Parse the coordinates of each sensor and beacon from the input
 const pairs: {
   sensor: { x: number; y: number };
@@ -24,31 +24,37 @@ for (const line of lines) {
       Math.abs(parseInt(x1) - parseInt(x2)) +
       Math.abs(parseInt(y1) - parseInt(y2)),
   });
-  beacons.add(`${x2},${y2}`);
+  // if beacon isn't already in the beacons array, add it
+  if (
+    !beacons.some(
+      (beacon) => beacon[0] === parseInt(x2) && beacon[1] === parseInt(y2)
+    )
+  )
+    beacons.push([parseInt(x2), parseInt(y2)]);
 }
 
-const minX = Math.min(...pairs.map((p) => p.beacon.x - p.distance));
-const maxX = Math.max(...pairs.map((p) => p.beacon.x + p.distance));
-
-const cantBeBeacon = new Set();
+const cantBeBeaconRanges: number[][] = [];
 const row = 2000000;
-for (let x = minX - 1; x < maxX + 1; x++) {
-  if (x % 100000 === 0) console.log(x / 100000);
-  // iterate over all pairs
-  for (const pair of pairs) {
-    // Calculate the distance from the current cell to the sensor
-    const distanceToSensor =
-      Math.abs(x - pair.sensor.x) + Math.abs(row - pair.sensor.y);
-    // If the distance is less or equal to the distance to the beacon,
-    // and no beacon is present, the cell cannot be a beacon
-    if (
-      cantBeBeacon.has(`${x},${row}`) === false &&
-      distanceToSensor <= pair.distance &&
-      beacons.has(`${x},${row}`) === false
-    ) {
-      cantBeBeacon.add(`${x},${row}`);
-    }
+for (const pair of pairs) {
+  // calculate the occupied cells minY and maxY and add them to cantBeBeaconRanges array
+  const minX = pair.sensor.x - (pair.distance - Math.abs(pair.sensor.y - row));
+  const maxX = pair.sensor.x + (pair.distance - Math.abs(pair.sensor.y - row));
+  if (minX < maxX) {
+    cantBeBeaconRanges.push([minX, maxX]);
   }
 }
 
-console.log(cantBeBeacon.size);
+// Calculate the union of all the cantBeBeaconRanges
+const cantBeBeaconRangesUnion = cantBeBeaconRanges.reduce(
+  (acc, range) => {
+    return [Math.min(acc[0], range[0]), Math.max(acc[1], range[1])];
+  },
+  [Infinity, -Infinity]
+);
+console.log(cantBeBeaconRangesUnion);
+
+let result = cantBeBeaconRangesUnion[1] - cantBeBeaconRangesUnion[0] + 1;
+console.log(result);
+// remove the beacons that have the same y coordinate as the row
+result -= beacons.filter((beacon) => beacon[1] === row).length;
+console.log(result);
